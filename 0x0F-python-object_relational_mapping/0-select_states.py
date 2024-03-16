@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-script that lists all states from the database hbtn_0e_0_usa
+This script lists all states from the
+database `hbtn_0e_0_usa`.
 """
 
 import MySQLdb
@@ -11,12 +12,12 @@ if __name__ == '__main__':
     Access to the database and get the states
     from the database.
     """
-    Mdb = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
-                         passwd=argv[2], Mdb=argv[3])
+    db = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
+                         passwd=argv[2], db=argv[3])
 
-    cr = Mdb.cursor()
-    cr.execute("SELECT * FROM states")
-    row2 = cr.fetchall()
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states")
+    rows = cur.fetchall()
 
-    for row1 in row2:
-        print(row1)
+    for row in rows:
+        print(row)
