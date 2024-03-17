@@ -1,24 +1,25 @@
 #!/usr/bin/python3
-"""This script lists all states from the
-database `hbtn_0e_0_usa"""
+"""
+This script lists all states from the
+database `hbtn_0e_0_usa".
+"""
 
 import MySQLdb
-import sys
-if __name__ == "__main__":
+from sys import argv
+
+if __name__ == '__main__':
     """
     Access to the database and get the states
     from the database.
     """
-    Mdb = MySQLdb.connect(
-        user=sys.argv[1], passwd=sys.argv[2], Mdb=sys.argv[3], port=3306)
+    Mdb = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
+                         passwd=argv[2], db=argv[3])
 
-    cr = mdb.cursor()
-    cr.execute(
-        "SELECT * FROM states;"
+    cur = Mdb.cursor()
+    cur.execute("SELECT * FROM states \
+                 WHERE name LIKE BINARY 'N%' \
+                 ORDER BY states.id ASC")
+    rws = cur.fetchall()
 
-    )
-    states = cr.fetchall()
-    for state in states:
-        print(state)
-    cr.close()
-    mdb.close()
+    for row in rws:
+        print(row)
