@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 This script lists all states from the
-database `hbtn_0e_0_usa".
+database `hbtn_0e_0_usa`.
 """
 
 import MySQLdb
@@ -12,14 +12,12 @@ if __name__ == '__main__':
     Access to the database and get the states
     from the database.
     """
-    Mdb = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
+    db = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
                          passwd=argv[2], db=argv[3])
 
-    cur = Mdb.cursor()
-    cur.execute("SELECT * FROM states \
-                 WHERE name LIKE BINARY 'N%' \
-                 ORDER BY states.id ASC")
-    rws = cur.fetchall()
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states")
+    rows = cur.fetchall()
 
-    for row in rws:
+    for row in rows:
         print(row)
